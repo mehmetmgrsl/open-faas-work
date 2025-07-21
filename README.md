@@ -16,8 +16,16 @@
 
 ### Installation
 
-- [Installation](./INSTALLATION.md)
+- [K8s Cluster with kind and Local Registry](./k8s-cluster-with-kind.md)
+
+- [Deploy open-faas community edition](./deploy-openfaas-community.md)
+
+### Deploy a Custom Node.js Function on OpenFaaS
+
+- [Deploy a Custom Node.js Function on OpenFaaS](./deploy-custom-function-to-openfaas.md)
 
 ### References
 
 (1*) https://docs.openfaas.com/
+
+(2*) https://docs.openfaas.com/cli/templates/
