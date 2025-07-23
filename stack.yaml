@@ -1,0 +1,11 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  hello-node:
+    lang: node22
+    handler: ./hello-node
+    image: docker.io/docker-hub-user/hello-node:latest
+    imagePullSecrets:
+      - my-registry-secret

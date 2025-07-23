@@ -54,10 +54,6 @@ export OPENFAAS_URL=http://127.0.0.1:8080
 - Then test it:
   - echo "Hello Mehmet" | faas-cli invoke figlet
 
-### Uninstall OpenFaaS
-
-- helm uninstall openfaas -n openfaas
-- kubectl delete namespace openfaas openfaas-fn
 
 ### References
 

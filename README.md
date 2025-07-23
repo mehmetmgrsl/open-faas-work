@@ -16,7 +16,7 @@
 
 ### Installation
 
-- [K8s Cluster with kind and Local Registry](./k8s-cluster-with-kind.md)
+- [K8s Cluster with Kind](./k8s-cluster-with-kind.md)
 
 - [Deploy open-faas community edition](./deploy-openfaas-community.md)
 

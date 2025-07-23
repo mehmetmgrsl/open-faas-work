@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-node
+  namespace: openfaas-fn
+spec:
+  selector:
+    app: hello-node
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
