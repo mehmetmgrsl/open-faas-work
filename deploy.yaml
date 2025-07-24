@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
         - name: hello-node
-          image: docker-hub-user/hello-node:latest
+          image: <account-id>.dkr.ecr.eu-west-1.amazonaws.com/hello-node:latest
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
       imagePullSecrets:
-        - name: my-registry-secret
+        - name: ecr-registry-secret

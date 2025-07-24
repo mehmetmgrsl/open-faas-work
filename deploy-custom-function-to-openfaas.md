@@ -2,14 +2,18 @@
 
 - This guide uses the latest **Node.js 22 (HTTP-based)** template with **of-watchdog**, which allows your function to handle HTTP requests directly.
 
-1. Create Secret to use Private Docker Registry
+0. Create a Private ECR Repository on AWS
+
+- aws ecr create-repository --repository-name hello-node
+
+1. Create Secret to use Private Docker Registry on AWS
 
 ```
-kubectl create secret docker-registry my-registry-secret \
-  --docker-server=docker.io \
-  --docker-username=docker-hub-user \
-  --docker-password='docker-hub-user-psw' \
-  --docker-email=docker-hub-user-email \
+kubectl create secret docker-registry ecr-registry-secret \
+  --docker-server=<account-id>.dkr.ecr.eu-west-1.amazonaws.com \
+  --docker-username=AWS \
+  --docker-password=$(aws ecr get-login-password --region eu-central-1) \
+  --docker-email=user-email \
   --namespace=openfaas-fn
 ```
 
@@ -45,9 +49,9 @@ functions:
   hello-node:
     lang: node22
     handler: ./hello-node
-    image: docker.io/docker-hub-user/hello-node:latest
+    image: <account-id>.dkr.ecr.eu-west-1.amazonaws.com/hello-node:latest
     imagePullSecrets:
-      - my-registry-secret
+      - ecr-registry-secret
 ```
 
 3. Write Your Function Code
@@ -72,11 +76,12 @@ module.exports = async (event, context) => {
   - faas-cli build -f stack.yaml
 
 - Tag the image 
-  - docker tag hello-node:latest docker-hub-user/hello-node:latest
+  - docker tag hello-node:latest <account-id>.dkr.ecr.eu-central-1.amazonaws.com/hello-node:latest
 
 
 - Push it to the docker hub
-  - docker push docker-hub-user/hello-node:latest
+  - docker push <account-id>.dkr.ecr.eu-central-1.amazonaws.com/hello-node:latest
+
 
 5. Deploy the Function to OpenFaaS
 
@@ -99,3 +104,4 @@ module.exports = async (event, context) => {
 - helm uninstall openfaas -n openfaas
 - kubectl delete namespace openfaas openfaas-fn
 - kind delete cluster --name openfaas   
+- aws ecr delete-repository --repository-name hello-node --force
